@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-sm-4 dealer-hand">
+    <h3>Cards Dealer:</h3>
+    <div class="row">
+      <% session[:dealer_cards].each do |card| %>
+        <% card.each do |suit, card| %>
+          <div class="col-xs-2">
+            <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        Value <span class="badge"><%= get_total(session[:dealer_cards]) %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4 player-hand">
+    <h3>Cards Player:</h3>
+    <div class="row">
+      <% session[:player_cards].each do |card| %>
+        <% card.each do |suit, card| %>
+          <div class="col-xs-2">
+            <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        Value <span class="badge"><%= get_total(session[:player_cards]) %></span>
+      </div>
+    </div>
+
+    <% if session[:game_state] == :player_turn %>
+      <div class="row">
+        <div class="col-xs-2">
+          <form id="hit" action="/game/player/hit" method="POST">
+            <button class= "btn btn-success btn-large">Hit</button>
+          </form>
+        </div>
+
+        <div class="col-xs-2">
+          <form id="stay" action="/game/player/stay" method="POST">
+            <button class= "btn btn-warning btn-large">Stay</button>
+          </form>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blackjack - 21</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/application.css">
+  </head>
+  <body style="padding-top: 80px;">
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/bet">Blackjack</a>
+
+      </div>
+      <!--        <p class="navbar-text navbar-left">
+          <a href="/bet" class="navbar-link">New game</a>
+        </p>
+
+        <% if session[:username] %>
+          <p class="navbar-text navbar-right">
+            Signed in as <strong><%= session[:username] %></strong>. <a href="/logout">logout</a>
+          </p>
+        <% end %>
+      </div> -->
+
+    </div>
+  </nav>
+
+  <div class="container">
+    <%if @error %>
+      <div class="alert alert-danger"><%= @error %></div>
+    <% end %>
+
+    <% if session[:winner_msg] %>
+      <%= session[:winner_msg] %>
+    <% end %>
+
+    <%= yield %>
+  </div>
+  </body>
+</html>
