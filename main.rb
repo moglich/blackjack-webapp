@@ -4,8 +4,6 @@ require 'pry'
 
 set :sessions, true
 
-ST_BUSTED = "Busted!"
-ST_BLACKJACK = "Blackjack!"
 LMT_DEALER_HIT = 17
 LMT_BLACKJACK = 21
 
