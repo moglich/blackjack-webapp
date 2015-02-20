@@ -2,7 +2,9 @@ require 'rubygems'
 require 'sinatra'
 require 'pry'
 
-set :sessions, true
+use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :secret => 'AS21-12mix1%mmX$fj3A-fm238l32' 
 
 START_MONEY = 500
 LMT_DEALER_HIT = 17
