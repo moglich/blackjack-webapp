@@ -2,18 +2,31 @@
   <div class="col-sm-4 dealer-hand">
     <h3>Cards Dealer:</h3>
     <div class="row">
-      <% session[:dealer_cards].each do |card| %>
-        <% card.each do |suit, card| %>
+      <% if session[:game_state] != :player_turn %>
+        <% session[:dealer_cards].each do |card| %>
+          <% card.each do |suit, card| %>
+            <div class="col-xs-2">
+              <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <% session[:dealer_cards].first.each do |suit, card| %>
           <div class="col-xs-2">
             <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
           </div>
         <% end %>
+        <div class="col-xs-2">
+          <img src="/images/cards/cover.jpg" class="img-rounded card-border img-xs">
+        </div>
       <% end %>
     </div>
     <div class="row">
-      <div class="col-xs-12">
-        Value <span class="badge"><%= get_total(session[:dealer_cards]) %></span>
-      </div>
+      <% if session[:game_state] != :player_turn %>
+        <div class="col-xs-12">
+          Value <span class="badge"><%= get_total(session[:dealer_cards]) %></span>
+        </div>
+      <% end %>
     </div>
   </div>
 
