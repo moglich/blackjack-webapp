@@ -4,6 +4,7 @@ require 'pry'
 
 set :sessions, true
 
+START_MONEY = 500
 LMT_DEALER_HIT = 17
 LMT_BLACKJACK = 21
 
@@ -170,6 +171,7 @@ end
 
 post '/new_player' do
   session[:username] = params[:username]
+  session[:money] = START_MONEY
   redirect '/bet'
 end
 
@@ -182,7 +184,7 @@ get '/bet' do
 end
 
 post '/bet' do
-  session[:bet] = params[:bet]
+  session[:bet] = params[:bet].to_i
   redirect '/new_game'
 end
 
