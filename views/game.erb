@@ -1,36 +1,40 @@
 <div class="row">
-  <div class="col-sm-4 dealer-hand">
-    <h3>Cards Dealer:</h3>
-    <div class="row">
-      <% session[:dealer_cards].each do |card| %>
-        <% card.each do |suit, card| %>
-          <div class="col-xs-2">
-            <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
-          </div>
+  <div class="col-sm-6">
+    <div class="dealer-hand">
+      <h3>Cards Dealer</h3>
+      <div class="row card-stack">
+        <% session[:dealer_cards].each do |card| %>
+          <% card.each do |suit, card| %>
+            <div class="cards">
+              <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        Value <span class="badge"><%= get_total(session[:dealer_cards]) %></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          Value <span class="badge"><%= get_total(session[:dealer_cards]) %></span>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-4 player-hand">
-    <h3>Cards Player:</h3>
-    <div class="row">
-      <% session[:player_cards].each do |card| %>
-        <% card.each do |suit, card| %>
-          <div class="col-xs-2">
-            <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
-          </div>
+  <div class="col-sm-6">
+    <div class="player-hand">
+      <h3>Cards Player</h3>
+      <div class="row card-stack">
+        <% session[:player_cards].each do |card| %>
+          <% card.each do |suit, card| %>
+            <div class="cards">
+              <img src=<%= "/images/cards/#{suit.to_s}_#{card.first[0]}.jpg" %> class="img-rounded card-border img-xs">
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        Value <span class="badge"><%= get_total(session[:player_cards]) %></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          Value <span class="badge"><%= get_total(session[:player_cards]) %></span>
+        </div>
       </div>
     </div>
 
