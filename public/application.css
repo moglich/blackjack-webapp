@@ -2,6 +2,12 @@ body {
   background: green;
 }
 
+.container {
+  max-width: 800px;
+  width: 80%;
+  margin: 0 auto;
+}
+
 .well {
   background-color: darkgreen;
   color: black;
@@ -15,16 +21,24 @@ body {
 
 .player-hand,
 .dealer-hand {
-  border: 1px dashed navy;
+  border: 1px dashed black;
   margin: 5px;
+  padding: 5px 25px;
 }
 
 .player-hand img {
-  height: 120px;
+  height: 10em;
 }
 
 .dealer-hand img {
-  height: 80px;
+  height: 10em;
+}
+
+h3 {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 1.5em;
+  color: black;
+  margin: 0.5em 0;
 }
 
 .card-border {
@@ -34,6 +48,14 @@ body {
   box-shadow:         -6px 8px 5px 0px rgba(50, 50, 50, 0.7);
   height: 300px;
 }
+
+.cards {
+  float: left;
+  margin-right: -50px;
+}
+ .card-stack {
+  margin: 0 auto;
+ }
 
 .img-xs {
   height: 150px;
