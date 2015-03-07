@@ -226,6 +226,11 @@ end
 post '/bet' do
   session[:bet] = params[:bet].to_i
 
+  if session[:bet] <= 0
+    status_msg!(:bet_to_high, "Please enter an amount higher than 0!")
+    halt erb :bet
+  end
+
   if session[:bet] > session[:money]
     status_msg!(:bet_to_high, "Your bet is higher than your actual money!")
     halt erb :bet
