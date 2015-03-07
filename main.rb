@@ -101,7 +101,7 @@ helpers do
     end
   end
 
-  def winner_msg!(state, msg="")
+  def status_msg!(state, msg="")
     case state
     when :push
       level = "warning"
@@ -116,9 +116,9 @@ helpers do
     end
 
     if state != :reset
-      session[:winner_msg] = "<div class=\"alert alert-#{level}\">#{msg}</div>"
+      session[:status_msg] = "<div class=\"alert alert-#{level}\">#{msg}</div>"
     else
-      session[:winner_msg] = nil
+      session[:status_msg] = nil
     end
   end
 
@@ -129,14 +129,14 @@ helpers do
     when :busted_player
       session[:game_state] = :busted_player
       loose_money!
-      winner_msg!(:winner_dealer, "You are busted, #{session[:username]}!")
+      status_msg!(:winner_dealer, "You are busted, #{session[:username]}!")
     when :blackjack_player
       win_money!
-      winner_msg!(:winner_player, "You got a blackjack, #{session[:username]}!")
+      status_msg!(:winner_player, "You got a blackjack, #{session[:username]}!")
       game_state!(:stop)
     when :winner_player
       win_money!
-      winner_msg!(:winner_player, "You won, #{session[:username]}!")
+      status_msg!(:winner_player, "You won, #{session[:username]}!")
       game_state!(:stop)
 
     when :dealer_turn
@@ -144,14 +144,14 @@ helpers do
     when :busted_dealer
       win_money!
       session[:game_state] = :busted_dealer
-      winner_msg!(:winner_player, "Dealer is busted, you won!")
+      status_msg!(:winner_player, "Dealer is busted, you won!")
     when :winner_dealer
       loose_money!
-      winner_msg!(:winner_dealer, "Dealer won, you lost #{session[:username]}!")
+      status_msg!(:winner_dealer, "Dealer won, you lost #{session[:username]}!")
       game_state!(:stop)
 
     when :push
-      winner_msg!(:push, "It's a push!")
+      status_msg!(:push, "It's a push!")
       game_state!(:stop)
     when :stop
       session[:game_state] = :stop
@@ -195,6 +195,8 @@ get '/bet' do
     redirect '/new_player'
   end
 
+  status_msg!(:reset)
+
   erb :bet
 end
 
@@ -202,7 +204,7 @@ post '/bet' do
   session[:bet] = params[:bet].to_i
 
   if session[:bet] > session[:money]
-    winner_msg!(:bet_to_high, "Your bet is higher than your actual money!")
+    status_msg!(:bet_to_high, "Your bet is higher than your actual money!")
     redirect '/bet'
   end
 
@@ -214,7 +216,7 @@ get '/new_game' do
     redirect '/new_player'
   end
 
-  winner_msg!(:reset)
+  status_msg!(:reset)
   game_state!(:player_turn)
 
   session[:deck] = new_deck

@@ -39,8 +39,8 @@
       <div class="alert alert-danger"><%= @error %></div>
     <% end %>
 
-    <% if session[:winner_msg] %>
-      <%= session[:winner_msg] %>
+    <% if session[:status_msg] %>
+      <%= session[:status_msg] %>
     <% end %>
 
     <%= yield %>
