@@ -128,20 +128,25 @@ helpers do
       session[:game_state] = :player_turn
     when :busted_player
       session[:game_state] = :busted_player
+      loose_money!
       winner_msg!(:winner_dealer, "You are busted, #{session[:username]}!")
     when :blackjack_player
+      win_money!
       winner_msg!(:winner_player, "You got a blackjack, #{session[:username]}!")
       game_state!(:stop)
     when :winner_player
+      win_money!
       winner_msg!(:winner_player, "You won, #{session[:username]}!")
       game_state!(:stop)
 
     when :dealer_turn
       session[:game_state] = :dealer_turn
     when :busted_dealer
+      win_money!
       session[:game_state] = :busted_dealer
       winner_msg!(:winner_player, "Dealer is busted, you won!")
     when :winner_dealer
+      loose_money!
       winner_msg!(:winner_dealer, "Dealer won, you lost #{session[:username]}!")
       game_state!(:stop)
 
@@ -151,6 +156,14 @@ helpers do
     when :stop
       session[:game_state] = :stop
     end
+  end
+
+  def loose_money!
+    session[:money] = session[:money] - session[:bet]
+  end
+
+  def win_money!
+    session[:money] = session[:money] + session[:bet]
   end
 end
 
@@ -187,6 +200,12 @@ end
 
 post '/bet' do
   session[:bet] = params[:bet].to_i
+
+  if session[:bet] > session[:money]
+    winner_msg!(:bet_to_high, "Your bet is higher than your actual money!")
+    redirect '/bet'
+  end
+
   redirect '/new_game'
 end
 

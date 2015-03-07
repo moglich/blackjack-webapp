@@ -17,16 +17,19 @@
         <a class="navbar-brand" href="/bet">Blackjack</a>
 
       </div>
-      <!--        <p class="navbar-text navbar-left">
+        <p class="navbar-text navbar-left">
           <a href="/bet" class="navbar-link">New game</a>
+        </p>
+        <p class="navbar-text navbar-left">
+          <%= session[:money] %>
         </p>
 
         <% if session[:username] %>
           <p class="navbar-text navbar-right">
-            Signed in as <strong><%= session[:username] %></strong>. <a href="/logout">logout</a>
+            Signed in as <strong><%= session[:username] %></strong> | <a href="/logout">logout</a>
           </p>
         <% end %>
-      </div> -->
+      </div>
 
     </div>
   </nav>
