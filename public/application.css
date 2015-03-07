@@ -1,5 +1,6 @@
 body {
   background: green;
+  min-width: 400px;
 }
 
 .container {
