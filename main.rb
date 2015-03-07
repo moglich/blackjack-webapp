@@ -47,6 +47,29 @@ helpers do
   end
   # >> {"2" => 2}
 
+  def show_cards(cards, show_first=true)
+    card_stack = ""
+
+    if show_first
+      session[cards].each do |card|
+        card.each do |suit, card|
+          card_stack << "<div class=\"cards\">
+            <img src=\"/images/cards/#{suit.to_s}_#{card.first[0]}.jpg\" class=\"img-rounded card-border img-xs\">
+          </div>"
+        end
+      end
+    else
+      session[cards].first.each do |suit, card|
+        card_stack << "<div class=\"cards\">
+                        <img src=\"/images/cards/#{suit.to_s}_#{card.first[0]}.jpg\" class=\"img-rounded card-border img-xs\">
+                       </div>"
+      end
+      card_stack << "<div class=\"cards\">
+                       <img src=\"/images/cards/cover.jpg\" class=\"img-rounded card-border img-xs\">
+                     </div>"
+    end
+    card_stack
+  end
 
   def get_total(cards) #[{:hearts=>{"queen"=>10}}, {:spades=>{"7"=>7}}]
     value = 0
@@ -205,7 +228,7 @@ post '/bet' do
 
   if session[:bet] > session[:money]
     status_msg!(:bet_to_high, "Your bet is higher than your actual money!")
-    redirect '/bet'
+    halt erb :bet
   end
 
   redirect '/new_game'
@@ -243,6 +266,10 @@ end
 get '/game' do
   if !session[:username]
     redirect '/new_player'
+  end
+
+  if !session[:bet]
+    redirect '/bet'
   end
 
   erb :game
