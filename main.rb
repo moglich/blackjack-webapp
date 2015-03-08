@@ -287,12 +287,8 @@ post '/game/player/hit' do
     game_state!(:busted_player)
   end
 
-  redirect '/game'
-end
-
-get '/game/compare' do
-  show_winner!(session[:dealer_cards], session[:player_cards])
-  redirect '/game'
+  #redirect '/game'
+  erb :game, layout: false
 end
 
 post '/game/player/stay' do
@@ -306,5 +302,7 @@ post '/game/player/stay' do
     game_state!(:busted_dealer)
   end
 
-  redirect '/game/compare'
+  show_winner!(session[:dealer_cards], session[:player_cards])
+
+  erb :game, layout: false
 end
