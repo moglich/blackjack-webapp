@@ -1,8 +1,12 @@
 <% if session[:status_msg] %>
   <%= session[:status_msg] %>
 <% end %>
-    
+
 <div id="game" class="row">
+
+  <div class="row user-info">
+    Money: <%= session[:money] %> | Bet: <%= session[:bet] %>
+  </div>
   <div class="col-sm-6">
     <div class="player-hand">
       <h3>Cards Player</h3>

@@ -23,9 +23,6 @@
         <p class="navbar-text navbar-left">
           <a href="/bet" class="navbar-link">New game</a>
         </p>
-        <p class="navbar-text navbar-left">
-          <%= session[:money] %>
-        </p>
 
         <% if session[:username] %>
           <p class="navbar-text navbar-right">
@@ -40,10 +37,6 @@
   <div class="container">
     <%if @error %>
       <div class="alert alert-danger"><%= @error %></div>
-    <% end %>
-
-    <% if session[:status_msg] %>
-      <%= session[:status_msg] %>
     <% end %>
 
     <%= yield %>

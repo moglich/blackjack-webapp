@@ -20,6 +20,10 @@ body {
   margin-top: 10px;
 }
 
+.user-info {
+  margin-left: 20px;
+}
+
 .player-hand,
 .dealer-hand {
   border: 1px dashed black;

@@ -183,10 +183,12 @@ helpers do
 
   def loose_money!
     session[:money] = session[:money] - session[:bet]
+    session[:bet] = "--"
   end
 
   def win_money!
     session[:money] = session[:money] + session[:bet]
+    session[:bet] = "--"
   end
 end
 

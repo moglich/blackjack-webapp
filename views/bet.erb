@@ -1,4 +1,10 @@
-<div class="row">
+<% if session[:status_msg] %>
+  <%= session[:status_msg] %>
+<% end %>
+<div class="row user-info">
+  Money: <%= session[:money] %> | Bet: <%= session[:bet] %>
+</div>
+<div class="row user-info">
   <form action="/bet" method="post">
     <input type="text" name="bet">
     <button type="submit" class="btn">Make bet</button>
